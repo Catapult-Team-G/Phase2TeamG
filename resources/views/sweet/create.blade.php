@@ -12,11 +12,11 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
           @include('common.errors')
-          <form class="mb-6" action="{{ route('tweet.store') }}" method="POST"> <!-- actionいじる-->
+          <form class="mb-6" action="{{ route('sweet.store') }}" method="POST"> <!-- actionいじる-->
             @csrf
             <div class="flex flex-col mb-4">
-              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="sweet_name">Sweet_name</label>
-              <input class="border py-2 px-3 text-grey-darkest" type="text" name="sweet_name" id="sweet_name">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="sweet">Sweet</label>
+              <input class="border py-2 px-3 text-grey-darkest" type="text" name="sweet" id="sweet">
             </div>
             <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="store">Store</label>
