@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SweetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +20,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('sweet', SweetController::class);
 
 require __DIR__.'/auth.php';
