@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SweetController;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,5 +24,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('sweet', SweetController::class);
+Route::resource('profile', ProfileController::class);
+Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
 
 require __DIR__.'/auth.php';

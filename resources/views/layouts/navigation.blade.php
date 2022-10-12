@@ -44,6 +44,15 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <form method="GET" action="{{ route('profile.show', Auth::user()->id) }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('profile.show', Auth::user()->id)"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        </form>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
