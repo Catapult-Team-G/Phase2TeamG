@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Validator;
+use App\Models\Sweet;
+
 class SweetController extends Controller
 {
     /**
@@ -14,6 +17,8 @@ class SweetController extends Controller
     public function index()
     {
         //
+        $sweets = Sweet::getAllOrderByUpdated_at();
+        return view('sweet.index',compact('sweets'));
     }
 
     /**
@@ -37,14 +42,15 @@ class SweetController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
-          'sweet' => 'required ',
+          'sweet_name' => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect()
+          return redirect()
             ->route('sweet.create')
             ->withInput()
             ->withErrors($validator);
         }
+
         $result = Sweet::create($request->all());
         return redirect()->route('sweet.index');
     }
@@ -93,4 +99,5 @@ class SweetController extends Controller
     {
         //
     }
+
 }
