@@ -15,6 +15,8 @@
             <thead>
               <tr>
                 <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">sweet</th>
+                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">store</th>
+                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">price</th>
               </tr>
             </thead>
             <tbody>
