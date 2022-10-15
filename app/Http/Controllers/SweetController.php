@@ -32,6 +32,14 @@ class SweetController extends Controller
         return view('sweet.create');
     }
 
+    public function confirm(Request $request){
+      $inputs = $request->all();
+
+      return view('sweet.confirm', [
+        'inputs' => $inputs,
+      ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,8 +59,22 @@ class SweetController extends Controller
             ->withErrors($validator);
         }
 
-        $result = Sweet::create($request->all());
-        return redirect()->route('sweet.index');
+        // フォームから押したボタンの情報をactionで取得
+        $action = $request->input('action');
+
+        // フォームからactionを除くインプットされた情報を取得
+        $inputs = $request->except('action');
+
+        // actionの値で分岐
+        if($action !== 'submit'){
+          return redirect()
+            ->route('contact.index')
+            ->withInput($inputs);
+        } else {
+          $result = Sweet::create($request->all());
+          return redirect()->route('sweet.index');
+        }
+
     }
 
     /**
