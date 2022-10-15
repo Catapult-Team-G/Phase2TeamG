@@ -44,6 +44,7 @@
                       {{$user->prefecture->prefecture}}
                     @else
                       Not Set
+                      {{$user->prefecture}}
                     @endif
                   </p>
                 </td>
