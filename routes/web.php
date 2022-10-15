@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SweetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('sweet', SweetController::class);
 Route::resource('profile', ProfileController::class);
+Route::resource('review', ReviewController::class);
+
 Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 

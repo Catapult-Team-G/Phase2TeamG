@@ -15,15 +15,23 @@
           <form class="mb-6" action="{{ route('review.store') }}" method="POST"> <!-- actionいじる-->
             @csrf
             <div class="flex flex-col mb-4">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="sweet">Sweet</label>
+              <select class="form-control" id="sweet" name="sweet_id">
+              @foreach ($sweets as $sweet)
+                <option value="{{$sweet->id}}">{{$sweet->sweet_name}}</option>
+              @endforeach
+              </select>
+            </div>
+            <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="review">Review</label>
               <input class="border py-2 px-3 text-grey-darkest" type="text" name="review" id="review">
             </div>
             <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="rate">Rate</label>
-              <input class="border py-2 px-3 text-grey-darkest" type="number" name="rate" id="rate">
+              <input class="border py-2 px-3 text-grey-darkest" type="number" name="rate" id="rate" min="1" max="5">
             </div>
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
-              Create
+              Post Review
             </button>
           </form>
         </div>
