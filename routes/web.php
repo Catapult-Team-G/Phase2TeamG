@@ -24,12 +24,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('sweet', SweetController::class);
-Route::resource('profile', ProfileController::class);
-Route::resource('review', ReviewController::class);
+Route::group(['middleware' => 'auth'], function () {
+    /*
+    Route::resource('sweet', SweetController::class);
+    */
+    Route::resource('profile', ProfileController::class);
+    Route::resource('review', ReviewController::class);
+    Route::resource('sweet', SweetController::class)->except([
+        'index' //indexをauthの外で
+    ]);
 
-Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
-Route::get('profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+});
 
+Route::get('sweet', [SweetController::class, 'index'])->name('sweet.index');
 
 require __DIR__.'/auth.php';
