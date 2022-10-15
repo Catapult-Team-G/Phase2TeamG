@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use App\Models\Sweet;
+use App\Models\Review;
+use Auth;
 
-class SweetController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +20,6 @@ class SweetController extends Controller
     public function index()
     {
         //
-        $sweets = Sweet::getAllOrderByUpdated_at();
-        return view('sweet.index',compact('sweets'));
     }
 
     /**
@@ -28,16 +29,8 @@ class SweetController extends Controller
      */
     public function create()
     {
-        //
-        return view('sweet.create');
-    }
-
-    public function confirm(Request $request){
-      $inputs = $request->all();
-
-      return view('sweet.confirm', [
-        'inputs' => $inputs,
-      ]);
+        $sweets = DB::table('sweets')->get();
+        return view('review.create', compact('sweets'));
     }
 
     /**
@@ -48,33 +41,20 @@ class SweetController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validator = Validator::make($request->all(), [
-          'sweet_name' => 'required',
+            'review' => 'required | max:191',
         ]);
         if ($validator->fails()) {
-          return redirect()
-            ->route('sweet.create')
+            return redirect()
+            ->route('review.create')
             ->withInput()
             ->withErrors($validator);
         }
 
-        // フォームから押したボタンの情報をactionで取得
-        $action = $request->input('action');
-
-        // フォームからactionを除くインプットされた情報を取得
-        $inputs = $request->except('action');
-
-        // actionの値で分岐
-        if($action !== 'submit'){
-          return redirect()
-            ->route('contact.index')
-            ->withInput($inputs);
-        } else {
-          $result = Sweet::create($request->all());
-          return redirect()->route('sweet.index');
-        }
-
+        $request->merge(['user_id' => Auth::user()->id]);
+        $result = Review::create($request->all());
+        //test
+        return redirect()->route('review.create');
     }
 
     /**
@@ -121,5 +101,4 @@ class SweetController extends Controller
     {
         //
     }
-
 }

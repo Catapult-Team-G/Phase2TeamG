@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
-use Validator;
-use App\Models\Sweet;
-
-class SweetController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,6 @@ class SweetController extends Controller
     public function index()
     {
         //
-        $sweets = Sweet::getAllOrderByUpdated_at();
-        return view('sweet.index',compact('sweets'));
     }
 
     /**
@@ -29,15 +26,6 @@ class SweetController extends Controller
     public function create()
     {
         //
-        return view('sweet.create');
-    }
-
-    public function confirm(Request $request){
-      $inputs = $request->all();
-
-      return view('sweet.confirm', [
-        'inputs' => $inputs,
-      ]);
     }
 
     /**
@@ -48,33 +36,6 @@ class SweetController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $validator = Validator::make($request->all(), [
-          'sweet_name' => 'required',
-        ]);
-        if ($validator->fails()) {
-          return redirect()
-            ->route('sweet.create')
-            ->withInput()
-            ->withErrors($validator);
-        }
-
-        // フォームから押したボタンの情報をactionで取得
-        $action = $request->input('action');
-
-        // フォームからactionを除くインプットされた情報を取得
-        $inputs = $request->except('action');
-
-        // actionの値で分岐
-        if($action !== 'submit'){
-          return redirect()
-            ->route('contact.index')
-            ->withInput($inputs);
-        } else {
-          $result = Sweet::create($request->all());
-          return redirect()->route('sweet.index');
-        }
-
     }
 
     /**
@@ -85,7 +46,8 @@ class SweetController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('profile.show', compact('user'));
     }
 
     /**
@@ -96,7 +58,9 @@ class SweetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $prefectures = DB::table('prefectures')->get();
+        return view('profile.edit', compact('user', 'prefectures'));
     }
 
     /**
@@ -108,7 +72,9 @@ class SweetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $result = User::find($id)->update($request->all());
+        $user = User::find($id);
+        return redirect()->route('profile.show', compact('user'));
     }
 
     /**
@@ -121,5 +87,4 @@ class SweetController extends Controller
     {
         //
     }
-
 }

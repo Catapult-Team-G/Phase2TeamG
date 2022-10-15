@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('prefectures', function (Blueprint $table) {
             $table->id();
             $table->string('prefecture');
-            $table->timestamps();
         });
     }
 
