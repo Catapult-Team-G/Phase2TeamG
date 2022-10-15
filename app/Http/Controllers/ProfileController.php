@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -59,8 +60,13 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $prefectures = DB::table('prefectures')->get();
-        return view('profile.edit', compact('user', 'prefectures'));
+        if($id == Auth::user()->id) {
+            $prefectures = DB::table('prefectures')->get();
+            return view('profile.edit', compact('user', 'prefectures'));
+        } else {
+            //return view('profile.show', compact('user'));
+            return redirect(route('profile.show', ['user' => $user->id]));
+        }
     }
 
     /**
