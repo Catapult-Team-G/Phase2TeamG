@@ -85,7 +85,9 @@ class SweetController extends Controller
      */
     public function show($id)
     {
-        //
+      //
+      $sweet = Sweet::find($id);
+      return view('sweet.show',compact('sweet'));
     }
 
     /**
