@@ -33,6 +33,14 @@ class ReviewController extends Controller
         return view('review.create', compact('sweets'));
     }
 
+    public function confirm(Request $request)
+    {
+      $inputs = $request->all();
+
+      return view('review.confirm', [
+        'inputs' => $inputs,
+      ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -51,10 +59,20 @@ class ReviewController extends Controller
             ->withErrors($validator);
         }
 
-        $request->merge(['user_id' => Auth::user()->id]);
-        $result = Review::create($request->all());
-        //test
-        return redirect()->route('review.create');
+        $action = $request->input('action');
+
+        $inputs = $request->except('action');
+
+        if($action !== 'submit'){
+          return redirect()
+            ->route('review.create')
+            ->withInput($inputs);
+        } else {
+          $request->merge(['user_id' => Auth::user()->id]);
+          $result = Review::create($request->all());
+          //test
+          return redirect()->route('review.create');
+        }
     }
 
     /**

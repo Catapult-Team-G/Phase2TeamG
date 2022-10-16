@@ -28,6 +28,9 @@ Route::resource('sweet', SweetController::class);
 Route::resource('profile', ProfileController::class);
 Route::resource('review', ReviewController::class);
 
+Route::post('review.confirm', [ReviewController::class,'confirm'])->name('review.confirm');
+Route::post('sweet.confirm', [SweetController::class,'confirm'])->name('sweet.confirm');
+
 Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 

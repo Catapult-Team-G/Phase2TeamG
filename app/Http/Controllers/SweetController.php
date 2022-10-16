@@ -68,7 +68,7 @@ class SweetController extends Controller
         // actionの値で分岐
         if($action !== 'submit'){
           return redirect()
-            ->route('contact.index')
+            ->route('sweet.create')
             ->withInput($inputs);
         } else {
           $result = Sweet::create($request->all());
