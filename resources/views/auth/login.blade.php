@@ -14,18 +14,15 @@
 
             <!-- Email Address -->
             <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required autofocus />
 
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
                 <x-text-input id="password" class="block mt-1 w-full"
+                                placeholder="Password"
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
@@ -41,17 +38,29 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-primary-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
+            <div class="py-2">
+                <button type="submit" class="px-3 py-1 text-white bg-black rounded w-full">Log In</button>
             </div>
+            @if (Route::has('password.request'))
+                <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+            {{ __('Forgot your password?') }}
+        </a>
+        @endif
         </form>
+
+        <p class="mt-2 mb-4 text-center">or</p>
+
+        <form action="{{ route('login.google') }}" method="GET" class="py-1">
+            <button type="submit" class="px-3 py-1 border border-primary rounded w-full">
+                Login with Google
+            </button>
+        </form>
+
+        <form action="{{ route('login.twitter') }}" method="GET" class="py-1">
+            <button type="submit" class="px-3 py-1 border border-primary rounded w-full">
+                Login with Twitter
+            </button>
+        </form>
+
     </x-auth-card>
 </x-guest-layout>
