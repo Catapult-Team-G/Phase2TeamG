@@ -21,23 +21,29 @@
             </thead>
             <tbody>
               @foreach ($sweets as $sweet)
-              <tr class="hover:bg-grey-lighter">
-                <td class="py-4 px-6 border-b border-grey-light">
-                  <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->sweet_name}}</h3>
-                  <div class="flex">
-                  </div>
-                </td>
-                <td class="py-4 px-6 border-b border-grey-light">
-                  <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->store}}</h3>
-                  <div class="flex">
-                  </div>
-                </td>
-                <td class="py-4 px-6 border-b border-grey-light">
-                  <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->price}}円</h3>
-                  <div class="flex">
-                  </div>
-                </td>
-              </tr>
+                <tr class="hover:bg-grey-lighter ">
+                   <td class="py-4 px-6 border-b border-grey-light display:block">
+                  <a href="{{ route('sweet.show',$sweet->id) }}">
+                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->sweet_name}}</h3>
+                  </a>
+                     <div class="flex">
+                     </div>
+                   </td>
+                   <td class="py-4 px-6 border-b border-grey-light display:block">
+                  <a href="{{ route('sweet.show',$sweet->id) }}">
+                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->store}}</h3>
+                   </a>
+                     <div class="flex">
+                     </div>
+                   </td>
+                   <td class="py-4 px-6 border-b border-grey-light display:block">
+                  <a href="{{ route('sweet.show',$sweet->id) }}">
+                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->price}}円</h3>
+                   </a>
+                     <div class="flex">
+                     </div>
+                   </td>
+                </tr>
               @endforeach
             </tbody>
           </table>
