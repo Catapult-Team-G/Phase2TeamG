@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SweetController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TwitterLoginController;
@@ -30,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
     /*
     Route::resource('sweet', SweetController::class);
     */
+    Route::get('/sweet/search/input', [SearchController::class, 'create'])->name('search.input');
+    Route::get('/sweet/search/result', [SearchController::class, 'index'])->name('search.result');
     Route::resource('profile', ProfileController::class);
     Route::resource('review', ReviewController::class);
     Route::resource('sweet', SweetController::class)->except([
