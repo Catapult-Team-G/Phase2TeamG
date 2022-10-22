@@ -20,7 +20,7 @@ class TwitterLoginController extends Controller
         try {
             $twitterUser = Socialite::driver('twitter')->user();
         } catch (\Exception $e) {
-            return redirect('auth/twitter');
+            return redirect('login');
         }
         if(User::where('email', $twitterUser->getEmail())->exists()) {
             //ツイッターで作成されたユーザーならそのままパスする
