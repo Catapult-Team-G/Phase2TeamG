@@ -30,9 +30,9 @@
               <input class="border py-2 px-3 text-grey-darkest" type="hidden" name="price" id="price" value="{{ $inputs['price'] }}">
             </div>
             <div class="flex flex-col mb-4">
-              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="image">Image</label>
-              <div>{{ $inputs['image'] }}</div>
-              <input class="border py-2 px-3 text-grey-darkest" type="hidden" name="image" id="image" value="{{ $inputs['image'] }}">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="image_path">Image</label>
+              <div>{{ $inputs['image_path'] }}</div>
+              <input class="border py-2 px-3 text-grey-darkest" type="hidden" name="image_path" id="image_path" value="{{ $inputs['image_path'] }}">
             </div>
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none" name="action" value="submit" >
               Create

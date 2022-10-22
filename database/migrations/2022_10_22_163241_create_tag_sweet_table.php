@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('authtype')->default(false);
-            $table->text('nickname')->nullable();
+        Schema::create('tag_sweet', function (Blueprint $table) {
+            $table->foreignId('sweet_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
+            $table->unique(['sweet_id', 'tag_id']);
         });
     }
 
@@ -26,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tag_sweet');
     }
 };
