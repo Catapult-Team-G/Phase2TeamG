@@ -65,7 +65,7 @@
         </div>
         <div class="text-center">
           <form action="{{ route('profile.edit',$user->id) }}" method="GET">
-            <button type="submit" class="px-3 py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+            <button type="submit" class="px-3 py-3 mt-6 font-medium tracking-widest text-white uppercase bg-orange-800 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Edit Profile
             </button>
           </form>
