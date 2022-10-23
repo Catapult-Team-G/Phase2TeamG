@@ -30,7 +30,7 @@
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="image">Image</label>
               <input class="border py-2 px-3 text-grey-darkest" type="file" name="image" id="image">
             </div>
-            <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+            <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-orange-800 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Create
             </button>
           </form>
