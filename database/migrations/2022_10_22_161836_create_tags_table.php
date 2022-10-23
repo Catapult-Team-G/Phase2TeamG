@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('authtype')->default(false);
-            $table->text('nickname')->nullable();
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string('tag');
         });
     }
 
@@ -26,8 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tags');
     }
 };

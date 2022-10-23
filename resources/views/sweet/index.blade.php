@@ -8,47 +8,31 @@
   </x-slot>
 
   <div class="py-12">
+
     <div class="max-w-7xl mx-auto sm:w-10/12 md:w-8/10 lg:w-8/12">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
-          <table class="text-center w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">sweet</th>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">store</th>
-                <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-lg text-grey-dark border-b border-grey-light">price</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($sweets as $sweet)
-                <tr class="hover:bg-grey-lighter ">
-                   <td class="py-4 px-6 border-b border-grey-light display:block">
-                  <a href="{{ route('sweet.show',$sweet->id) }}">
-                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->sweet_name}}</h3>
-                  </a>
-                     <div class="flex">
-                     </div>
-                   </td>
-                   <td class="py-4 px-6 border-b border-grey-light display:block">
-                  <a href="{{ route('sweet.show',$sweet->id) }}">
-                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->store}}</h3>
-                   </a>
-                     <div class="flex">
-                     </div>
-                   </td>
-                   <td class="py-4 px-6 border-b border-grey-light display:block">
-                  <a href="{{ route('sweet.show',$sweet->id) }}">
-                     <h3 class="text-left font-bold text-lg text-grey-dark">{{$sweet->price}}円</h3>
-                   </a>
-                     <div class="flex">
-                     </div>
-                   </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
+
+      @foreach ($sweets as $sweet)
+        <a href="{{route('sweet.show',$sweet->id)}}" style="margin: 50px;">
+          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="padding: 20px;">
+            <div class="flex">
+              <div class="flex-initial" style="margin: 0px 10px 0px 0px;">
+                <img style="width: 25vw; height: 30vh; object-fit:cover;" src="{{Storage::url($sweet->image_path)}}">
+              </div>
+              <div class="flex-initial" style="margin: 0px 10px 0px 0px; width: 70%;">
+                <div class="font-bold" style="font-size: 2rem">{{$sweet->sweet_name}}</div>
+                <div>{{$sweet->store}}</div>
+                <hr>
+                <div class="font-bold" style="font-size: 1.25rem; padding: 5px 0px;">￥ {{$sweet->price}}</div>
+                <div>
+                  @foreach ($sweet->tags as $tag)
+                    <span style="padding: 3px; border: 1px solid;">{{$tag->tag}}</span>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      @endforeach
     </div>
   </div>
 </x-app-layout>

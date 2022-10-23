@@ -20,4 +20,13 @@ class Sweet extends Model
         return self::orderBy('updated_at', 'desc')->get();
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function reviews()
+    {
+      return $this->hasMany(Review::class);
+    }
 }
