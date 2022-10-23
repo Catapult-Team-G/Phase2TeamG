@@ -12,7 +12,7 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
           @include('common.errors')
-          <form class="mb-6" action="{{ route('sweet.confirm') }}" method="POST"> 
+          <form class="mb-6" action="{{ route('sweet.confirm') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col mb-4">
               <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="sweet_name">Sweet</label>
@@ -27,8 +27,8 @@
               <input class="border py-2 px-3 text-grey-darkest" type="number" name="price" id="price" value="{{ old('price')}}">
             </div>
             <div class="flex flex-col mb-4">
-              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="image_path">Image</label>
-              <input class="border py-2 px-3 text-grey-darkest" type="file" name="image_path" id="image_path" value="{{ old('image_path')}}">
+              <label class="mb-2 uppercase font-bold text-lg text-grey-darkest" for="image">Image</label>
+              <input class="border py-2 px-3 text-grey-darkest" type="file" name="image" id="image">
             </div>
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-orange-800 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
               Create

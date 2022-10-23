@@ -33,10 +33,20 @@ class SweetController extends Controller
     }
 
     public function confirm(Request $request){
-      $inputs = $request->all();
+
+     // $imgに画像を保存
+        $img = $request->file('image');
+        
+        // public/images に画像を保存 & $pathに画像のパスを保存
+        $path = $img->store('images','public');
+
+        // リクエストに画像パスを結合
+        $request->request->remove('image');
+        $request->merge(['image_path' => $path]);
+
 
       return view('sweet.confirm', [
-        'inputs' => $inputs,
+        'inputs' => $request,
       ]);
     }
 
