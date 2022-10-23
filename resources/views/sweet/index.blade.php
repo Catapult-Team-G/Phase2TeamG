@@ -22,8 +22,12 @@
                 <div class="font-bold" style="font-size: 2rem">{{$sweet->sweet_name}}</div>
                 <div>{{$sweet->store}}</div>
                 <hr>
-                <div>￥ {{$sweet->price}}</div>
-                <div>{{$sweet->tags}}</div>
+                <div class="font-bold" style="font-size: 1.25rem; padding: 5px 0px;">￥ {{$sweet->price}}</div>
+                <div>
+                  @foreach ($sweet->tags as $tag)
+                    <span style="padding: 3px; border: 1px solid;">{{$tag->tag}}</span>
+                  @endforeach
+                </div>
               </div>
             </div>
           </div>

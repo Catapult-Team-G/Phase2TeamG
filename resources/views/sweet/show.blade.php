@@ -8,40 +8,61 @@
   </x-slot>
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
-          <div class="mb-6">
-            <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">name</p>
-              <p class="py-2 px-3 text-grey-darkest" id="sweet_name">
-                {{$sweet->sweet_name}}
-              </p>
+    <div class="max-w-7xl mx-auto">
+      <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="flex">
+          <div class="flex-initial" style="margin: 0px 10px 0px 0px;">
+            <img style="width: 40vw; height: 40vh; object-fit:cover;" src="{{Storage::url($sweet->image_path)}}">
+          </div>
+          <div class="flex-initial" style="margin: 0px 10px 0px 0px; width: 70%;">
+            <div class="font-bold" style="font-size: 2rem">{{$sweet->sweet_name}}</div>
+            <div>{{$sweet->store}}</div>
+            <hr>
+            <div class="font-bold" style="font-size: 1.25rem; padding: 5px 0px;">￥ {{$sweet->price}}</div>
+            <div>
+              @foreach ($sweet->tags as $tag)
+                <span style="padding: 3px; border: 1px solid;">{{$tag->tag}}</span>
+              @endforeach
             </div>
-            <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">store</p>
-              <p class="py-2 px-3 text-grey-darkest" id="store">
-                {{$sweet->store}}
-              </p>
-            </div>
-            <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">price</p>
-              <p class="py-2 px-3 text-grey-darkest" id="price">
-                {{$sweet->price}}
-              </p>
-            </div>
-            <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-grey-darkest">image</p>
-              <p class="py-2 px-3 text-grey-darkest" id="path">
-                {{$sweet->image_path}}
-              </p>
-            </div>
-            <a href="{{ url()->previous() }}" class="block text-center w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
-              Back
-            </a>
           </div>
         </div>
       </div>
+
+      <div>
+        @foreach($sweet->reviews as $review)
+          <div class="px-4 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg" style="margin: 20px 0px;">
+            <div>
+              @php
+                $star = $review->rate;
+                $starLeft = 5 - $star;
+              @endphp
+              <span style="color: rgb(255, 187, 0); font-size: 1.25rem;">
+              @for($i = 0; $i < $star; $i++)
+                ★
+              @endfor
+              <span style="color: rgb(121, 121, 121);">
+              @for($i = 0; $i < $starLeft; $i++)
+                ★
+              @endfor
+            </div>
+
+            <div style="padding: 10px 0px">
+              {{$review->review}}
+            </div>
+
+            <div>
+              {{$review->user->prefecture->prefecture}}　{{$review->user->age}}歳　
+              @if($review->user->gender = 'male')
+                男性
+              @else
+                女性
+              @endif
+            </div>
+            {{$review->created_at}}
+          </div>
+        @endforeach
+      </div>
+
     </div>
   </div>
 </x-app-layout>

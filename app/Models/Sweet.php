@@ -22,7 +22,11 @@ class Sweet extends Model
 
     public function tags()
     {
-      return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 
+    public function reviews()
+    {
+      return $this->hasMany(Review::class);
+    }
 }
